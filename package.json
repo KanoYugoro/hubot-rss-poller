@@ -9,6 +9,9 @@
     "test": "npm run lint && mocha",
     "prepublish": "npm run build"
   },
+  "files": [
+    "lib"
+  ],
   "author": "Anson Wayman <kanoyugoro@gmail.com>",
   "licenses": [
     {
