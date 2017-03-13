@@ -13,7 +13,12 @@ install, or you can specify in an environment variable `HUBOT_RSS_CONFIG_FILE`.
 {
   "feeds": [{
     "name": "Name of the RSS feed goes here",
-    "url": "URL to the RSS feed",
+    "request": { // An object that contains the request parameters. Example not all inclusive
+    	"uri": "URI to the RSS feed goes here",
+	"headers": {
+	    "Method": "GET"
+	}
+    },
     "room": "room to message out to when an update is found",
     "pingInterval": "100", // How many seconds to wait before polling for update
     "alertPrefix": "A prefix to the output message goes here.",

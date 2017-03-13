@@ -7,7 +7,7 @@ export default function getFeed(options) {
     const time = new Date().getTime();
     options.robot.logger.debug(`Checking ${options.name || 'unnamed feed'} at ${time}`);
 
-    const requestResult = await request(options.url);
+    const requestResult = await request(options.request);
 
     const feedResult = new NodePie(requestResult);
     try {
