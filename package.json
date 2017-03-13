@@ -13,6 +13,11 @@
     "lib"
   ],
   "author": "Anson Wayman <kanoyugoro@gmail.com>",
+  "homepage": "https://github.com/KanoYugoro/hubot-rss-poller",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KanoYugoro/hubot-rss-poller"
+  },
   "licenses": [
     {
       "type": "The MIT License",
