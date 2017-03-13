@@ -16,15 +16,4 @@ export default async function rssPoller(robot) {
   } catch (err) {
     robot.logger.debug(err.message);
   }
-  /* const feed = getFeed({
-    name: 'Team Space RSS',
-    url: 'http://kb.extendhealth.com/spaces/createrssfeed.action?types=blogpost&spaces=ST&maxResults=15&title=%5BTeams%5D+Blog+Feed&amp;publicFeed=false&amp;os_authType=basic', // eslint-disable-line max-len
-    room: 0, // room to ping when there is a change
-    alertPrefix: 'test prefix', // What to prefix the output message with
-    alertSuffix: 'test suffix', // What to append to the end of the output message
-    robot,
-    pingInterval: 5,
-  });
-
-  feed.startFeed(); */
 }
