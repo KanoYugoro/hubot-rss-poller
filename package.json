@@ -1,6 +1,6 @@
 {
   "name": "hubot-rss-poller",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simple poller for RSS feeds in hubot.  It will alert to chat on updates to the feed polled on a regular interval.",
   "main": "lib/index.js",
   "scripts": {
