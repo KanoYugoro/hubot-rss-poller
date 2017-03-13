@@ -8,11 +8,11 @@ export default async function rssPoller(robot) {
     config = await loadFile(process.env.HUBOT_RSS_CONFIG_FILE || 'hubotrssconfig.json');
     config = JSON.parse(config);
 
-  config.feeds.map(x => {
-    const feed = getFeed({ ...x, robot });
-    return feed;
-  })
-    .forEach(x => x.startFeed());
+    config.feeds.map(x => {
+      const feed = getFeed({ ...x, robot });
+      return feed;
+    })
+      .forEach(x => x.startFeed());
   } catch (err) {
     robot.logger.debug(err.message);
   }
