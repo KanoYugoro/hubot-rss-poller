@@ -16,14 +16,14 @@ install, or you can specify in an environment variable `HUBOT_RSS_CONFIG_FILE`.
     "request": { // An object that contains the request parameters. Example not all inclusive
     	"uri": "URI to the RSS feed goes here",
 	"headers": {
-	    "Method": "GET"
+		"Method": "GET"
 	}
     },
     "room": "room to message out to when an update is found",
     "pingInterval": "100", // How many seconds to wait before polling for update
     "alertPrefix": "A prefix to the output message goes here.",
     "alertSuffix": "a suffix to an output message goes here.",
-    "initialDelay": "3" // initial wait (in seconds) check to allow hubot to connect"
+    "initialDelay": "3" // initial wait (in seconds) check to allow hubot to connect
   }]
 }
 ```
