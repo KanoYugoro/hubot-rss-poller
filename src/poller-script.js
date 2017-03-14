@@ -2,16 +2,10 @@ import getFeed from './rss-feed-poller';
 import loadFile from './config-parser.js';
 
 export default async function rssPoller(robot) {
-  // This will be loaded from a config file
-  let config;
   try {
-    config = await loadFile(process.env.HUBOT_RSS_CONFIG_FILE || 'hubotrssconfig.json');
-    config = JSON.parse(config);
+    const config = await loadFile(process.env.HUBOT_RSS_CONFIG_FILE || 'hubotrssconfig.json');
 
-    config.feeds.map(x => {
-      const feed = getFeed({ ...x, robot });
-      return feed;
-    })
+    JSON.parse(config).feeds.map(x => getFeed({ ...x, robot }))
       .forEach(x => x.startFeed());
   } catch (err) {
     robot.logger.debug(err.message);
