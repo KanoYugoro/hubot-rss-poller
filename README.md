@@ -27,3 +27,13 @@ install, or you can specify in an environment variable `HUBOT_RSS_CONFIG_FILE`.
   }]
 }
 ```
+
+##Basic Auth
+You can specify `username` and `password` on an individual feed, or place them
+in the http Authorization header and they will work just fine.  But if you're
+like me and don't like having usernames and passwords sitting around in something
+that is probably source controlled, you can specify them via two environment
+variables.  `HUBOT_RSS_FEED_USERNAME` and `HUBOT_RSS_FEED_PASSWORD` act as global
+defaults to all feeds specified for this script.  If you specify them as well as
+the `username` and `password` properties, the properties overwrite the environment
+variables.
