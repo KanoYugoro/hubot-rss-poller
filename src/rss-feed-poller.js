@@ -6,10 +6,27 @@ export default function getFeed(options) {
   async function checkFeed() {
     const time = new Date().getTime();
     options.robot.logger.debug(`Checking ${options.name || 'unnamed feed'} at ${time}`);
+    const env = process.env;
+    const username = options.username || env.HUBOT_RSS_FEED_USERNAME;
+    const password = options.password || env.HUBOT_RSS_FEED_PASSWORD;
 
-    const requestResult = await request(options.request);
+    const authString = `${username}:${password}`;
+    let credentials = {};
+    if (username && password && (!options.request.headers.Authorization)) {
+      credentials = {
+        headers: {
+          Authorization: `Basic ${new Buffer(authString).toString('base64')}`,
+        },
+      };
+    }
+
+    const requestResult = await request({
+      ...options.request,
+      ...credentials,
+    });
 
     const feedResult = new NodePie(requestResult);
+
     try {
       feedResult.init();
     } catch (err) {
