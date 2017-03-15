@@ -12,7 +12,8 @@ export default function getFeed(options) {
 
     const authString = `${username}:${password}`;
     let credentials = {};
-    if (username && password && (!options.request.headers.Authorization)) {
+    if (username && password || (options.request.headers
+                                 && options.request.headers.Authorization)) {
       credentials = {
         headers: {
           Authorization: `Basic ${new Buffer(authString).toString('base64')}`,
