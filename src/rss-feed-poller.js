@@ -40,11 +40,19 @@ export default function getFeed(options) {
       options.robot.logger.debug(`${itemPostedTime}`);
       if (itemPostedTime >= lastTime) {
         options.robot.logger.debug(`Found update for: ${latestItem.getTitle()}`);
-        options.robot.messageRoom(
-          options.room,
-          `${options.alertPrefix || ''}${latestItem.getTitle()} - ${latestItem.getPermalink()}` +
-            `${options.alertSuffix || ''}`
-        );
+        const message = `${options.alertPrefix || ''}${latestItem.getTitle()} - ` +
+          `${latestItem.getPermalink()}${options.alertSuffix || ''}`;
+        if (Array.isArray(options.room)) {
+          options.room.map((x) => options.robot.messageRoom(
+              x,
+              message
+            ));
+        } else {
+          options.robot.messageRoom(
+            options.room,
+            message
+          );
+        }
       }
     }
 
