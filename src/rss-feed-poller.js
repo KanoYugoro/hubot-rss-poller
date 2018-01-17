@@ -2,7 +2,7 @@ import NodePie from 'nodepie';
 import request from 'request-promise';
 
 export default function getFeed(options) {
-  let lastTime = 0;
+  let lastTime = new Date().getTime();
   async function checkFeed() {
     const time = new Date().getTime();
     options.robot.logger.debug(`Checking ${options.name || 'unnamed feed'} at ${time}`);
@@ -36,7 +36,7 @@ export default function getFeed(options) {
 
     const latestItem = feedResult.getItem(0);
     if (latestItem) {
-      const itemPostedTime = latestItem.getUpdateDate();
+      const itemPostedTime = latestItem.getDate();
       options.robot.logger.debug(`${itemPostedTime}`);
       if (itemPostedTime >= lastTime) {
         options.robot.logger.debug(`Found update for: ${latestItem.getTitle()}`);
