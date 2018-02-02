@@ -55,3 +55,5 @@ function Npm-Push {
     Npm-Publish($package,$NPM_BRANCHES)
   }
 }
+
+Npm-Push()
