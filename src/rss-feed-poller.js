@@ -3,7 +3,7 @@ import request from 'request-promise';
 
 export default function getFeed(options) {
   let lastTime = new Date().getTime();
-  let lastTile = '';
+  let lastTitle = '';
   async function checkFeed() {
     const time = new Date().getTime();
     options.robot.logger.debug(`Checking ${options.name || 'unnamed feed'} at ${time}`);
@@ -39,7 +39,7 @@ export default function getFeed(options) {
     if (latestItem) {
       const itemPostedTime = latestItem.getDate();
       options.robot.logger.debug(`${itemPostedTime}`);
-      if ((itemPostedTime >= lastTime) && (lastTitle != latestItem.getTitle())) {
+      if ((itemPostedTime >= lastTime) && (lastTitle !== latestItem.getTitle())) {
         lastTitle = latestItem.getTitle();
         options.robot.logger.debug(`Found update for: ${latestItem.getTitle()}`);
         const message = `${options.alertPrefix || ''}${latestItem.getTitle()} - ` +
