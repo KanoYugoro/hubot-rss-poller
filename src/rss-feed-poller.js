@@ -2,11 +2,13 @@ import NodePie from 'nodepie';
 import request from 'request-promise';
 
 export default function getFeed(options) {
-  let lastTime = new Date().getTime();
-  let lastTile = '';
+  const robot = options.robot;
+  let lastTime = robot.brain.get(`rss-poller:${options.name}:lastTime`) || new Date().getTime();
+  let lastTitle = robot.brain.get(`rss-poller:${options.name}:lastTitle`) || '';
+
   async function checkFeed() {
     const time = new Date().getTime();
-    options.robot.logger.debug(`Checking ${options.name || 'unnamed feed'} at ${time}`);
+    robot.logger.debug(`Checking ${options.name || 'unnamed feed'} at ${time}`);
     const env = process.env;
     const username = options.username || env.HUBOT_RSS_FEED_USERNAME;
     const password = options.password || env.HUBOT_RSS_FEED_PASSWORD;
@@ -32,13 +34,12 @@ export default function getFeed(options) {
     try {
       feedResult.init();
     } catch (err) {
-      options.robot.logger.debug(`${err.message}`);
+      robot.logger.error(`${err.message}`);
     }
 
     const latestItem = feedResult.getItem(0);
     if (latestItem) {
-      const itemPostedTime = latestItem.getDate();
-      options.robot.logger.debug(`${itemPostedTime}`);
+      const itemPostedTime = latestItem.getDate().getTime();
       if ((itemPostedTime >= lastTime) && (lastTitle != latestItem.getTitle())) {
         lastTitle = latestItem.getTitle();
         options.robot.logger.debug(`Found update for: ${latestItem.getTitle()}`);
@@ -59,6 +60,8 @@ export default function getFeed(options) {
     }
 
     lastTime = time;
+    robot.brain.set(`rss-poller:${options.name}:lastTitle`, lastTitle);
+    robot.brain.set(`rss-poller:${options.name}:lastTime`, lastTime);
   }
 
   function startFeed() {
